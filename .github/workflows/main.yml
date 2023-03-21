@@ -16,8 +16,11 @@ jobs:
         dotnet-version: [ 6, 7 ]
     steps:
       - uses: actions/checkout@v3
+        
       - name: Build Version
-        run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}" >> $GITHUB_ENV
+        run: |
+          echo ${GITHUB_REF}
+          echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}" >> $GITHUB_ENV
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
@@ -42,4 +45,3 @@ jobs:
         
       - name: Nuget Push
         run: dotnet nuget push ./publish/${{env.BUILD_VERSION}}/*.nupkg -k ${{ secrets.NUGET_API_KEY }}
-      
