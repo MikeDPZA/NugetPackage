@@ -31,7 +31,7 @@ jobs:
         run: dotnet build -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}/
         
       - name: Pack
-        run: cd ./publish/${{env.BUILD_VERSION}}/ && dotnet pack --no-build Release -o ./
+        run: cd ./publish/${{env.BUILD_VERSION}}/ && dotnet pack --no-build -o ./
         
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
