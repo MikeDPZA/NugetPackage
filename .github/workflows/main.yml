@@ -18,10 +18,8 @@ jobs:
         uses: actions/setup-dotnet@v3
         with: 
           dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Restore Dependencies
-        run: dotnet restore
       - name: Publish
-        run: dotnet publish -c Release -o ./publish/${{ matrix.dotnet-version }}
+        run: dotnet publish -f ${{matrix.dotnet-version}} -c Release -o ./publish/${{ matrix.dotnet-version }} 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
