@@ -37,9 +37,7 @@ jobs:
 #          path: ./publish/${{env.BUILD_VERSION}}
 #          retention-days: 1   
       - name: Build
-        run: dotnet build -c Release ${{env.NUGET_NAME}}.csproj -o ./publish/${{env.BUILD_VERSION}}
-      - name: Nuget Pack
-        run: dotnet pack -c Release -o ./publish/${{env.BUILD_VERSION}}    
+        run: dotnet build -c Release -o ./publish/${{env.BUILD_VERSION}}
       - name: Nuget Push
         run: dotnet nuget push ./publish/${{env.BUILD_VERSION}}/*.nupkg
       
