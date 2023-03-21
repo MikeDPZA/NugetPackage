@@ -19,9 +19,7 @@ jobs:
       - uses: actions/checkout@v3        
         
       - name: Build Version
-        env: 
-          BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}
-        run: echo "BUILD_VERSION=${{ ((startsWith(github.ref,'refs/heads/develop' && '-alpha') || ((startsWith(github.ref, 'refs/heads/release/') ||startsWith(github.ref, 'refs/heads/hotfix/')) && '-beta') || '')  }}" >> $GITHUB_ENV
+        run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}${{ github.ref == 'refs/heads/develop' && '-alpha' || '' }}${{ (startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/')) && '-beta' || '' }}" >> $GITHUB_ENV
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
