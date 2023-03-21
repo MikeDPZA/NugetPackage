@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <Title>SomePackage</Title>
+        <Authors>MikeDuPlooy</Authors>
+    </PropertyGroup>
+
+</Project>
