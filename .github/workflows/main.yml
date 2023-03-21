@@ -27,11 +27,8 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
         
-      - name: Build
-        run: dotnet pack ./${{env.NUGET_NAME}}/${{env.NUGET_NAME}}.csproj -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}/
-        
       - name: Pack
-        run: cd ./publish/${{env.BUILD_VERSION}}/ && dotnet pack --no-build -o ./
+        run: dotnet pack ./${{env.NUGET_NAME}}/${{env.NUGET_NAME}}.csproj -c Release -o ./publish/${{env.BUILD_VERSION}}/
         
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
