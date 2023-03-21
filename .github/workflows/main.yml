@@ -24,7 +24,7 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Publish
-        run: dotnet publish -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/net${{ matrix.dotnet-version }}.0
+        run: dotnet publish -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
