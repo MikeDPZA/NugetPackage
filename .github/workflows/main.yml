@@ -16,13 +16,12 @@ jobs:
       matrix:
         dotnet-version: [ 6, 7 ]
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Branch Name
-        run: echo "BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV          
+      - uses: actions/checkout@v3        
         
       - name: Build Version
-        run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}${{ ((startsWith(github.ref,'refs/heads/develop' && '-alpha') || ((startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/')) && '-beta')) || '' }}" >> $GITHUB_ENV
+        env: 
+          BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}
+        run: echo "BUILD_VERSION=${{ ((startsWith(github.ref,'refs/heads/develop' && '-alpha') || ((startsWith(github.ref, 'refs/heads/release/') ||startsWith(github.ref, 'refs/heads/hotfix/')) && '-beta') || '')  }}" >> $GITHUB_ENV
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
