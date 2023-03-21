@@ -42,7 +42,7 @@ jobs:
         run: dotnet build ./${{env.NUGET_NAME}}/${{env.NUGET_NAME}}.csproj -f net${{matrix.dotnet-version}}.0 -c Release    
         
       - name: Pack
-        run: dotnet pack --no-build -p:TargetFrameworks=net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}/
+        run: dotnet pack /${{env.NUGET_NAME}}/${{env.NUGET_NAME}}.csproj --no-build -p:TargetFrameworks=net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}/
         
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
