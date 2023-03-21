@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ 6.0.15, 7.0.2 ]    
+        dotnet-version: [ 6, 7 ]    
     steps:
       - uses: actions/checkout@v3
         
@@ -19,7 +19,7 @@ jobs:
         with: 
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Publish
-        run: dotnet publish -f ${{matrix.dotnet-version}} -c Release -o ./publish/${{ matrix.dotnet-version }} 
+        run: dotnet publish -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{ matrix.dotnet-version }} 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
