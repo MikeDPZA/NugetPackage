@@ -29,7 +29,14 @@ jobs:
       
       - name: Build
         run: dotnet build -f net${{matrix.dotnet-version}}.0 -c Release
-        
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built
+          path: .
+          retention-days: 1      
+          
       - name: Pack
         run: dotnet pack --no-build -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}/
         
