@@ -4,13 +4,16 @@ on:
   push:
     branches: [ develop ]
     
+env:
+  NUGET_NAME: ProjectNuget
+    
 jobs:
   
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ net6.0, net7.0 ]    
+        dotnet-version: [ 6, 7 ]    
     steps:
       - uses: actions/checkout@v3
         
@@ -19,10 +22,10 @@ jobs:
         with: 
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Publish
-        run: dotnet publish -f ${{ matrix.dotnet-version }} -c Release -o ./publish/${{ matrix.dotnet-version }}
+        run: dotnet publish -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/net${{ matrix.dotnet-version }}.0 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.dotnet-version }}
-          path: ./publish/${{ matrix.dotnet-version }}
+          name: ${{env.NUGET_NAME}}-net${{matrix.dotnet-version}}.0
+          path: ./publish/net${{matrix.dotnet-version}}.0
           retention-days: 1
