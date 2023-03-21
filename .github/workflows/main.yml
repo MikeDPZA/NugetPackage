@@ -26,18 +26,17 @@ jobs:
           source-url: https://api.nuget.org/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
-          
-#      - name: Publish
-#        run: dotnet publish -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}
         
-#      - name: Upload Artifact
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: ${{env.NUGET_NAME}}-${{env.BUILD_VERSION}}
-#          path: ./publish/${{env.BUILD_VERSION}}
-#          retention-days: 1   
       - name: Build
         run: dotnet build -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{env.NUGET_NAME}}-${{env.BUILD_VERSION}}
+          path: ./publish/${{env.BUILD_VERSION}}
+          retention-days: 1   
+        
       - name: Nuget Push
         run: dotnet nuget push ./publish/${{env.BUILD_VERSION}}/*.nupkg
       
