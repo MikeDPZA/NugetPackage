@@ -3,6 +3,9 @@
 on:
   push:
     branches: [ develop ]
+  
+env:
+  DOTNET_NET_NAME: net${{ matrix.dotnet-version }}.0
     
 jobs:
   
@@ -19,10 +22,10 @@ jobs:
         with: 
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Publish
-        run: dotnet publish -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{ matrix.dotnet-version }} 
+        run: dotnet publish -f ${{env.DOTNET_NET_NAME}} -c Release -o ./publish/${{ env.DOTNET_NET_NAME }}
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.dotnet-version }}
-          path: ./publish/${{ matrix.dotnet-version }}
+          path: ./publish/${{env.DOTNET_NET_NAME}}
           retention-days: 1
