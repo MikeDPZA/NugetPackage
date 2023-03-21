@@ -22,7 +22,7 @@ jobs:
         
       - name: Build Version      
         run: |
-          if [[${{env.BRANCH}} == develop]] 
+          if ${{env.BRANCH}} == develop 
           then
             echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}-alpha" >> $GITHUB_ENV
           else
