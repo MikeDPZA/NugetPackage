@@ -19,9 +19,10 @@ jobs:
       
       - name: Branch Name
         run: |
+          $branch = git rev-parse --abbrev-ref HEAD
           echo "BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
-          echo ${{env.BRANCH}}
-          git rev-parse --abbrev-ref HEAD
+          echo $branch
+          
         
       - name: Build Version      
         run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}" >> $GITHUB_ENV
