@@ -5,7 +5,7 @@ on:
     branches: [ develop ]
 
 env:
-  NUGET_NAME: ProjectNuget
+  NUGET_NAME: SomeNugetPackage
 
 jobs:
   
@@ -35,7 +35,8 @@ jobs:
           retention-days: 1         
           
       - name: Nuget Pack
-        run: dotnet pack -c Release -o ./publish/${{env.BUILD_VERSION}}
+        run: dotnet pack -c Release --no-build -o ./publish/${{env.BUILD_VERSION}}
+        
       - name: Nuget Push
         run: dotnet nuget push ./publish/${{env.BUILD_VERSION}}/${{env.NUGET_NAME}}.${{env.BUILD_VERSION}}.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
       
