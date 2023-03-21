@@ -28,7 +28,9 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
         
       - name: Pack
-        run: dotnet pack ./${{env.NUGET_NAME}}/${{env.NUGET_NAME}}.csproj -c Release -o ./publish/${{env.BUILD_VERSION}}/
+        run: |
+          echo "$PWD"
+          dotnet pack ./${{env.NUGET_NAME}}/${{env.NUGET_NAME}}.csproj -c Release -o ./publish/${{env.BUILD_VERSION}}/
         
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
