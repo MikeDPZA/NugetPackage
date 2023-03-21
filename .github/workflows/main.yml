@@ -6,6 +6,7 @@ on:
 
 env:
   NUGET_NAME: SomeNugetPackage
+  SOLUTION_NAME: SomeNugetPackage
 
 jobs:
   
@@ -38,7 +39,7 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
       
       - name: Build
-        run: dotnet build -f net${{matrix.dotnet-version}}.0 -c Release    
+        run: dotnet build ./${{env.NUGET_NAME}}/${{env.NUGET_NAME}}.csproj -f net${{matrix.dotnet-version}}.0 -c Release    
         
       - name: Pack
         run: dotnet pack --no-build -p:TargetFrameworks=net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}/
