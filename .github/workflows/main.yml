@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{env.NUGET_NAME}}-${{env.BUILD_VERSION}}
-          path: ./publish/${{env.BUILD_VERSION}}
+          path: ./publish
           retention-days: 1   
         
       - name: Nuget Push
