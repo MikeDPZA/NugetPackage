@@ -1,28 +1,30 @@
-﻿name: CI/CD 
+﻿name: CI/CD
 
 on:
   push:
     branches: [ develop ]
-    
+
 env:
   NUGET_NAME: ProjectNuget
-    
+
 jobs:
   
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ 6, 7 ]    
+        dotnet-version: [ 6, 7 ]
     steps:
       - uses: actions/checkout@v3
-        
+      - name: Build Version
+        run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}" >> $BUILD_VERSION
+
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
-        with: 
+        with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Publish
-        run: dotnet publish -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/net${{ matrix.dotnet-version }}.0 
+        run: dotnet publish -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/net${{ matrix.dotnet-version }}.0
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
