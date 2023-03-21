@@ -6,7 +6,6 @@ on:
 
 env:
   NUGET_NAME: ProjectNuget
-  BUILD_VERSION: ''
 
 jobs:
   
@@ -18,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build Version
-        run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}" >> $BUILD_VERSION
+        run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}" >> $GITHUB_ENV
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
