@@ -22,7 +22,7 @@ jobs:
         run: echo "BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV          
         
       - name: Build Version
-        run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}${{ (startsWith(github.ref,'refs/heads/develop' && '-alpha') || ((startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/')) && '-beta') || '' }}" >> $GITHUB_ENV
+        run: echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}${{ ((startsWith(github.ref,'refs/heads/develop' && '-alpha') || ((startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/')) && '-beta')) || '' }}" >> $GITHUB_ENV
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
