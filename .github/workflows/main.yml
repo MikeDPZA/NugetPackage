@@ -19,7 +19,7 @@ jobs:
         
       - name: Build Version
         run: |
-          echo ${GITHUB_REF}
+          echo ${{GITHUB_REF}}
           echo "BUILD_VERSION=${{matrix.dotnet-version}}.0.${{github.run_number}}" >> $GITHUB_ENV
 
       - name: Setup dotnet
