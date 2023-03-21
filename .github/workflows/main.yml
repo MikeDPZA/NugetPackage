@@ -6,6 +6,7 @@ on:
 
 env:
   NUGET_NAME: ProjectNuget
+  BUILD_VERSION: ''
 
 jobs:
   
