@@ -28,7 +28,7 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
         
       - name: Build
-        run: dotnet build -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}
+        run: dotnet build -f net${{matrix.dotnet-version}}.0 -c Release -o ./publish/${{env.BUILD_VERSION}}/
         
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
